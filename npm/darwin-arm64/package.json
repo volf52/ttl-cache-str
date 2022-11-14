@@ -1,0 +1,18 @@
+{
+  "name": "ttl-cache-str-darwin-arm64",
+  "version": "0.0.0",
+  "os": [
+    "darwin"
+  ],
+  "cpu": [
+    "arm64"
+  ],
+  "main": "ttl-cache-str.darwin-arm64.node",
+  "files": [
+    "ttl-cache-str.darwin-arm64.node"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 10"
+  }
+}
