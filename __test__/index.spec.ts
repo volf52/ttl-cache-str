@@ -1,7 +1,7 @@
-import test from 'ava'
+import { it, expect } from "@jest/globals";
 
-import { sum } from '../index.js'
+import { sum } from "../index.js";
 
-test('sum from native', (t) => {
-  t.is(sum(1, 2), 3)
-})
+it("sum from native", (t) => {
+	expect(sum(1, 2)).toBe(3);
+});
