@@ -1,8 +1,13 @@
 {
-  "name": "ttl-cache-str",
-  "version": "0.0.0",
+  "name": "@volfy/ttl-cache-str",
+  "version": "0.1.0",
   "main": "index.js",
   "types": "index.d.ts",
+  "author": "Arslan <rslnkrmt2552@gmail.com>",
+  "repository": "https://github.com/volf52/ttl-cache-str",
+  "bugs": {
+    "url": "https://github.com/volf52/ttl-cache-str/issues"
+  },
   "napi": {
     "name": "ttl-cache-str",
     "triples": {

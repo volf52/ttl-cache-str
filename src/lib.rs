@@ -5,6 +5,9 @@ use std::collections::HashMap;
 #[macro_use]
 extern crate napi_derive;
 
+// todo: add builder
+// todo: add cache
+
 #[napi(js_name = "TtlStrCache")]
 #[derive(Debug, Default)]
 pub struct TtlStrCache(HashMap<String, String>);
@@ -30,4 +33,13 @@ impl TtlStrCache {
   pub fn length(&self) -> u32 {
     self.0.len() as u32
   }
+
+  #[napi]
+  pub fn get(&self, key: String) -> Option<String> {
+    self.0.get(&key).map(|v| v.to_owned())
+  }
+}
+
+impl TtlStrCache {
+  fn dummy() {}
 }

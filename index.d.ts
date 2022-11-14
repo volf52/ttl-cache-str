@@ -8,4 +8,5 @@ export class TtlStrCache {
   static default(): TtlStrCache
   set(key: string, value: string): void
   length(): number
+  get(key: string): string | null
 }
