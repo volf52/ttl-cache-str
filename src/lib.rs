@@ -39,7 +39,3 @@ impl TtlStrCache {
     self.0.get(&key).map(|v| v.to_owned())
   }
 }
-
-impl TtlStrCache {
-  fn dummy() {}
-}
