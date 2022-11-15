@@ -3,15 +3,16 @@ name: Cargo + Node Tests
 on:
   pull_request:
     branches:
-      - main
+      - staging
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: true
       matrix:
-        node-version: [14.x, 18.x, 19.x]
+        node-version: [18.x]
 
     env:
       CARGO_TERM_COLOR: always
@@ -37,7 +38,7 @@ jobs:
           command: test
 
       - name: Install dependencies (node)
-        run: yarn --frozen-lockfile --prefer-offline
+        run: yarn --frozen-lockfile
 
       - name: Test (node)
         run: yarn test
