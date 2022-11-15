@@ -54,7 +54,7 @@ need_stdout = false
 [jobs.clippy-all]
 command = ["cargo", "clippy", "--all-targets", "--color", "always"]
 need_stdout = false
-watch = ["tests", "benches", "examples"]
+watch = ["tests", "benches", "examples", "src"]
 
 [jobs.test]
 command = ["cargo", "test", "--color", "always"]
