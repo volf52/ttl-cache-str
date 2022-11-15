@@ -3,15 +3,16 @@ name: Cargo + Node Tests
 on:
   pull_request:
     branches:
-      - main
+      - staging
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: true
       matrix:
-        node-version: [14.x, 18.x, 19.x]
+        node-version: [18.x]
 
     env:
       CARGO_TERM_COLOR: always
@@ -30,6 +31,7 @@ jobs:
           profile: minimal
           override: true
           toolchain: stable
+          target: x86_64-unknown-linux-gnu
 
       - name: Test (rust)
         uses: actions-rs/cargo@v1
@@ -37,7 +39,10 @@ jobs:
           command: test
 
       - name: Install dependencies (node)
-        run: yarn --frozen-lockfile --prefer-offline
+        run: yarn --frozen-lockfile
+
+      - name: Build
+        run: yarn build --target x86_64-unknown-linux-gnu
 
       - name: Test (node)
         run: yarn test
