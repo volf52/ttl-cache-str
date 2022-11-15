@@ -3,15 +3,25 @@
 #[macro_use]
 extern crate napi_derive;
 
-use std::collections::HashMap;
+use endorphin::policy::LazyFixedTTLPolicy;
+use endorphin::HashMap;
+use std::time::Duration;
 
 // todo: add builder
-// todo: add actual ttl cache
+
+const DEFAULT_TTL: u64 = 60 * 60 * 24 * 7; // 1 week
 
 #[napi]
-#[derive(Debug, Default)]
 pub struct TtlStrCache {
-  cache: HashMap<String, String>,
+  cache: HashMap<String, String, LazyFixedTTLPolicy>,
+}
+
+impl Default for TtlStrCache {
+  fn default() -> Self {
+    Self {
+      cache: HashMap::new(LazyFixedTTLPolicy::new(Duration::from_secs(DEFAULT_TTL))),
+    }
+  }
 }
 
 #[napi]
@@ -19,14 +29,21 @@ impl TtlStrCache {
   #[napi(constructor)]
   #[must_use]
   pub fn new() -> Self {
+    Self::default()
+  }
+
+  #[napi(factory)]
+  pub fn with_timeout_ms(timeout_ms: u32) -> Self {
     Self {
-      cache: HashMap::new(),
+      cache: HashMap::new(LazyFixedTTLPolicy::new(Duration::from_millis(
+        timeout_ms as u64,
+      ))),
     }
   }
 
   #[napi]
   pub fn set(&mut self, key: String, value: String) {
-    self.cache.insert(key, value);
+    self.cache.insert(key, value, ());
   }
 
   #[napi]
@@ -53,6 +70,7 @@ impl TtlStrCache {
 
   #[napi(getter)]
   #[must_use]
+  /* Can use this to clear the table */
   pub fn length(&self) -> u32 {
     self.len()
   }
