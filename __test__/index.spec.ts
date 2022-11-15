@@ -84,11 +84,11 @@ describe("check expiration", () => {
 		cache.set("key", "value");
 		expect(cache.get("key")).toBe("value");
 
-		await setTimeout(995);
-		// time passed ~995ms - shouldn't expire
+		await setTimeout(500);
+		// time passed ~500ms - shouldn't expire
 		expect(cache.length).toBe(1);
 
-		await setTimeout(6);
+		await setTimeout(501);
 
 		// time passed ~1s - should expire
 		expect(cache.length).toBe(0);
