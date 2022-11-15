@@ -1,4 +1,5 @@
-import { it, expect, describe } from "@jest/globals";
+import { it, expect, describe, jest } from "@jest/globals";
+import { setTimeout } from "node:timers/promises";
 
 import { TtlStrCache } from "../index.js";
 
@@ -62,5 +63,34 @@ describe("common cache tests", () => {
 		cache.set(key, val2);
 
 		expect(cache.get(key)).toBe(val2);
+	});
+});
+
+describe("check expiration", () => {
+	const fiveMinutes = 5 * 60 * 1000;
+	const one_sec = 1000;
+	const five_hundred_ms = 500;
+
+	it("has a value", () => {
+		const cache = TtlStrCache.withTimeoutMs(fiveMinutes);
+
+		cache.set("key", "value");
+		expect(cache.has("key")).toBe(true);
+	});
+
+	it("key expires after ttl", async () => {
+		const cache = TtlStrCache.withTimeoutMs(one_sec);
+
+		cache.set("key", "value");
+		expect(cache.get("key")).toBe("value");
+
+		await setTimeout(995);
+		// time passed ~995ms - shouldn't expire
+		expect(cache.length).toBe(1);
+
+		await setTimeout(6);
+
+		// time passed ~1s - should expire
+		expect(cache.length).toBe(0);
 	});
 });
