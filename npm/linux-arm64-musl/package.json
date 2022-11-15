@@ -1,5 +1,5 @@
 {
-  "name": "@volfy/ttl-cache-str-linux-arm64-musl",
+  "name": "@volf/ttl-cache-str-linux-arm64-musl",
   "version": "0.0.0",
   "os": [
     "linux"

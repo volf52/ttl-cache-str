@@ -1,3 +1,3 @@
-# `@volfy/ttl-cache-str-darwin-x64`
+# `@volf/ttl-cache-str-darwin-x64`
 
-This is the **x86_64-apple-darwin** binary for `@volfy/ttl-cache-str`
+This is the **x86_64-apple-darwin** binary for `@volf/ttl-cache-str`

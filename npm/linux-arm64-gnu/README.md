@@ -1,3 +1,3 @@
-# `@volfy/ttl-cache-str-linux-arm64-gnu`
+# `@volf/ttl-cache-str-linux-arm64-gnu`
 
-This is the **aarch64-unknown-linux-gnu** binary for `@volfy/ttl-cache-str`
+This is the **aarch64-unknown-linux-gnu** binary for `@volf/ttl-cache-str`
