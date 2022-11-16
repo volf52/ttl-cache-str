@@ -283,48 +283,6 @@ jobs:
             set -e
             yarn test
             ls -la
-  # test-linux-aarch64-musl-binding:
-  #   name: Test bindings on aarch64-unknown-linux-musl - node@${{ matrix.node }}
-  #   needs:
-  #     - build
-  #   strategy:
-  #     fail-fast: true
-  #     matrix:
-  #       node:
-  #         - '16'
-  #         - '18'
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - run: docker run --rm --privileged multiarch/qemu-user-static:register --reset
-  #     - uses: actions/checkout@v3
-  #     - name: Download artifacts
-  #       uses: actions/download-artifact@v3
-  #       with:
-  #         name: bindings-aarch64-unknown-linux-musl
-  #         path: .
-  #     - name: List packages
-  #       run: ls -R .
-  #       shell: bash
-  #     - name: Cache NPM dependencies
-  #       uses: actions/cache@v3
-  #       with:
-  #         path: .yarn/cache
-  #         key: npm-cache-test-linux-aarch64-musl-${{ matrix.node }}
-  #     - name: Install dependencies
-  #       run: |
-  #         yarn config set supportedArchitectures.cpu "arm64"
-  #         yarn config set supportedArchitectures.libc "musl"
-  #         yarn install
-  #     - name: Setup and run tests
-  #       uses: addnab/docker-run-action@v3
-  #       with:
-  #         image: multiarch/alpine:aarch64-latest-stable
-  #         options: '-v ${{ github.workspace }}:/build -w /build'
-  #         run: |
-  #           set -e
-  #           apk add nodejs==${{ matrix.node }} npm yarn
-  #           yarn test
-
   publish:
     name: Publish
     runs-on: ubuntu-latest
