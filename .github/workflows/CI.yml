@@ -288,7 +288,7 @@ jobs:
     needs:
       - build
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         node:
           - '16'
@@ -322,7 +322,7 @@ jobs:
           options: '-v ${{ github.workspace }}:/build -w /build'
           run: |
             set -e
-            apk add nodejs npm yarn
+            apk add nodejs==${{ matrix.node }} npm yarn
             yarn test
 
   publish:
