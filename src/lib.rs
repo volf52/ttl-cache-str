@@ -7,9 +7,10 @@ use endorphin::policy::LazyFixedTTLPolicy;
 use endorphin::HashMap;
 use std::time::Duration;
 
-// todo: add builder
-
 const DEFAULT_TTL: u64 = 60 * 60 * 24 * 7; // 1 week
+
+// todo: add builder
+pub struct TtlStrCacheBuilder;
 
 #[napi]
 pub struct TtlStrCache {
